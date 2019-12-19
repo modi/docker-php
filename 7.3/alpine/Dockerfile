@@ -75,3 +75,7 @@ RUN set -ex; \
     git clone --depth=1 --branch stable https://github.com/phacility/arcanist.git /usr/local/src/arcanist; \
     rm -rf /usr/local/src/arcanist/.git; \
     ln -s /usr/local/src/arcanist/bin/arc /usr/local/bin/arc
+
+ENTRYPOINT ["/bin/sh", "-c"]
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
