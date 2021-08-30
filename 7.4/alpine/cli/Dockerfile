@@ -1,12 +1,20 @@
-# docker build . -t modicn/php-dev:7.4.10-cli-alpine && docker push modicn/php-dev:7.4.10-cli-alpine
+# docker build . -t modicn/php-dev:7.4.23-cli-alpine3.14 && docker push modicn/php-dev:7.4.23-cli-alpine3.14
+# docker tag modicn/php-dev:7.4.23-cli-alpine3.14 modicn/php-dev:7.4-cli-alpine && docker push modicn/php-dev:7.4-cli-alpine
 
-FROM php:7.4.10-cli-alpine
+FROM php:7.4.23-cli-alpine3.14
 
-ARG COMPOSER_VER=1.10.13
-ARG PHPEXT_APCU_VER=5.1.18
+# https://github.com/composer/composer/releases
+ARG COMPOSER_VER=2.1.6
+# https://pecl.php.net/package/apcu
+ARG PHPEXT_APCU_VER=5.1.20
+# https://pecl.php.net/package/memcached
 ARG PHPEXT_MEMCACHED_VER=3.1.5
-ARG PHPEXT_REDIS_VER=5.3.1
-ARG PHPEXT_XDEBUG_VER=2.9.6
+# https://pecl.php.net/redis
+ARG PHPEXT_REDIS_VER=5.3.4
+# https://pecl.php.net/package/xdebug
+ARG PHPEXT_XDEBUG_VER=3.0.4
+# https://cs.symfony.com/
+ARG PHP_CS_FIXER_VER=v3
 
 RUN set -ex; \
     apk update; \
@@ -34,7 +42,6 @@ RUN set -ex; \
         bash \
         git \
         openssh-client \
-        supervisor \
         vim \
     ; \
     docker-php-ext-install \
@@ -66,14 +73,12 @@ RUN set -ex; \
 
 ENV LANG C.UTF-8
 
-RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
-
 RUN set -ex; \
     wget https://github.com/composer/composer/releases/download/${COMPOSER_VER}/composer.phar -q -O /usr/local/bin/composer; \
     chmod +x /usr/local/bin/composer
 
 RUN set -ex; \
-    wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -q -O /usr/local/bin/php-cs-fixer; \
+    wget https://cs.symfony.com/download/php-cs-fixer-${PHP_CS_FIXER_VER}.phar -q -O /usr/local/bin/php-cs-fixer; \
     chmod +x /usr/local/bin/php-cs-fixer
 
 RUN set -ex; \
