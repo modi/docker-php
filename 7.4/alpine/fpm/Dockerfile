@@ -20,6 +20,8 @@ RUN set -ex; \
         freetype-dev \
         libjpeg-turbo-dev \
         libpng-dev \
+        # ext-gmp
+        gmp-dev \
         # ext-memcached
         libmemcached-dev \
         # ext-zip
@@ -37,6 +39,7 @@ RUN set -ex; \
     ; \
     docker-php-ext-install \
         bcmath \
+        gmp \
         opcache \
         pcntl \
         pdo_mysql \
