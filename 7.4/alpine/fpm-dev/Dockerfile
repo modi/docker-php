@@ -9,6 +9,8 @@ ARG COMPOSER_VER=2.1.6
 ARG PHPEXT_XDEBUG_VER=3.0.4
 # https://cs.symfony.com/
 ARG PHP_CS_FIXER_VER=v3
+# https://github.com/bobthecow/psysh
+ARG PSYSH_VER=v0.10.8
 
 RUN set -ex; \
     apk update; \
@@ -43,5 +45,10 @@ RUN set -ex; \
     git clone --depth=1 --branch stable https://github.com/phacility/arcanist.git /usr/local/src/arcanist; \
     rm -rf /usr/local/src/arcanist/.git; \
     ln -s /usr/local/src/arcanist/bin/arc /usr/local/bin/arc
+
+RUN set -ex; \
+    wget https://github.com/bobthecow/psysh/releases/download/${PSYSH_VER}/psysh-${PSYSH_VER}.tar.gz -q -O /tmp/psysh.tar.gz; \
+    tar zxvf /tmp/psysh.tar.gz -C /usr/local/bin; \
+    chmod +x /usr/local/bin/psysh
 
 COPY arcrc /etc/arcconfig

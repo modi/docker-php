@@ -32,10 +32,14 @@ RUN set -ex; \
         freetype \
         libjpeg-turbo \
         libpng \
+        # ext-gmp
+        gmp \
         # ext-memcached
         libmemcached \
         # ext-zip
         libzip \
+        # BusyBox 提供的 unzip，解压输出的文件，权限是 777
+        unzip \
     ; \
     docker-php-ext-install \
         bcmath \
