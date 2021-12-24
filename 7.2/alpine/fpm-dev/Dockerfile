@@ -1,4 +1,6 @@
-FROM modicn/php:7.2.34-fpm-alpine3.12
+ARG PHP_VER=7.2.34
+
+FROM modicn/php:$PHP_VER-fpm-alpine3.12
 
 # https://github.com/composer/composer/releases
 ARG COMPOSER_VER=2.1.6

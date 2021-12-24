@@ -1,4 +1,6 @@
-FROM php:7.2.34-fpm-alpine3.12
+ARG PHP_VER=7.2.34
+
+FROM php:$PHP_VER-fpm-alpine3.12
 
 # https://pecl.php.net/package/apcu
 ARG PECL_APCU_VER=5.1.20
