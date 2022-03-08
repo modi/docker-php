@@ -43,12 +43,13 @@ RUN set -ex; \
 
 RUN set -ex; \
     git clone --depth=1 --branch stable https://github.com/phacility/arcanist.git /usr/local/src/arcanist; \
-    rm -rf /usr/local/src/arcanist/.git; \
-    ln -s /usr/local/src/arcanist/bin/arc /usr/local/bin/arc
+    ln -s /usr/local/src/arcanist/bin/arc /usr/local/bin/arc; \
+    rm -rf /usr/local/src/arcanist/.git
 
 RUN set -ex; \
     wget https://github.com/bobthecow/psysh/releases/download/${PSYSH_VER}/psysh-${PSYSH_VER}.tar.gz -q -O /tmp/psysh.tar.gz; \
     tar zxvf /tmp/psysh.tar.gz -C /usr/local/bin; \
-    chmod +x /usr/local/bin/psysh
+    chmod +x /usr/local/bin/psysh; \
+    rm /tmp/psysh.tar.gz
 
 COPY arcrc /etc/arcconfig

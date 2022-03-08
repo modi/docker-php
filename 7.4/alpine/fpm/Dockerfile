@@ -24,6 +24,8 @@ RUN set -ex; \
         gmp-dev \
         # ext-memcached
         libmemcached-dev \
+        # pdo_pgsql
+        postgresql-dev \
         # ext-zip
         libzip-dev \
     ; \
@@ -40,6 +42,10 @@ RUN set -ex; \
         libzip \
         # BusyBox 提供的 unzip，解压输出的文件，权限是 777
         unzip \
+        # ext-mongodb
+        icu-libs \
+        # pdo_pgsql
+        libpq \
     ; \
     docker-php-ext-install \
         bcmath \
@@ -47,6 +53,7 @@ RUN set -ex; \
         opcache \
         pcntl \
         pdo_mysql \
+        pdo_pgsql \
         zip \
     ; \
     docker-php-ext-configure gd \
