@@ -1,7 +1,6 @@
-# docker build . -t modicn/php:7.4-fpm-alpine3.14 && docker push modicn/php:7.4-fpm-alpine3.14
-# docker tag modicn/php:7.4-fpm-alpine3.14 modicn/php:7.4-fpm-alpine && docker push modicn/php:7.4-fpm-alpine
+# docker build . -t modicn/php:7.3
 
-FROM php:7.4-fpm-alpine3.14
+FROM php:7.3-fpm-alpine3.14
 
 # https://pecl.php.net/package/apcu
 ARG PECL_APCU_VER=5.1.20
@@ -49,6 +48,7 @@ RUN set -ex; \
     ; \
     docker-php-ext-install \
         bcmath \
+        exif \
         gmp \
         opcache \
         pcntl \
@@ -57,10 +57,13 @@ RUN set -ex; \
         zip \
     ; \
     docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
+        --with-freetype-dir \
+        --with-jpeg-dir \
+        --with-png-dir \
     ; \
     docker-php-ext-install gd; \
+    docker-php-ext-configure zip --with-libzip; \
+    docker-php-ext-install zip; \
     pecl install \
         apcu-${PECL_APCU_VER} \
         memcached-${PECL_MEMCACHED_VER} \
