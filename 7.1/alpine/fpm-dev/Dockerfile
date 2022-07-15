@@ -1,9 +1,9 @@
-FROM modicn/php:7.1-fpm
+FROM modicn/php:7.1
 
 # https://github.com/composer/composer/releases
-ARG COMPOSER_VER=2.2.12
+ARG COMPOSER_VER=2.0.14
 # https://pecl.php.net/package/xdebug
-ARG PHPEXT_XDEBUG_VER=3.0.4
+ARG PHPEXT_XDEBUG_VER=2.9.8
 # https://cs.symfony.com/
 ARG PHP_CS_FIXER_VER=v3
 # https://github.com/bobthecow/psysh

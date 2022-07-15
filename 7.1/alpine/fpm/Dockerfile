@@ -1,4 +1,4 @@
-# docker build . -t modicn/php:7.1-dev && docker push modicn/php:7.1-dev
+# docker build . -t modicn/php:7.1 && docker push modicn/php:7.1
 
 FROM php:7.1-fpm-alpine
 
@@ -58,7 +58,6 @@ RUN set -ex; \
         opcache \
         pcntl \
         pdo_mysql \
-        zip \
     ; \
     docker-php-ext-configure gd \
         --with-freetype-dir \
