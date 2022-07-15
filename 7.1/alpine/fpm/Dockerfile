@@ -27,6 +27,8 @@ RUN set -ex; \
         libmcrypt-dev \
         # ext-memcached
         libmemcached-dev \
+        # pdo_pgsql
+        postgresql-dev \
         # ext-sodium
         libsodium-dev \
         # ext-zip
@@ -47,24 +49,33 @@ RUN set -ex; \
         libsodium \
         # ext-zip
         libzip \
-        # tools
+        # BusyBox 的 unzip 输出文件权限是 777 太宽
         unzip \
+        # ext-mongodb
         icu-libs \
+        # pdo_pgsql
+        libpq \
     ; \
     docker-php-ext-install \
         bcmath \
+        exif \
         gmp \
         mcrypt \
         opcache \
         pcntl \
         pdo_mysql \
+        pdo_pgsql \
     ; \
+    # https://github.com/php/php-src/blob/PHP-7.1/ext/gd/config.m4
     docker-php-ext-configure gd \
         --with-freetype-dir \
         --with-jpeg-dir \
         --with-png-dir \
     ; \
     docker-php-ext-install gd; \
+    # https://github.com/php/php-src/blob/PHP-7.1/ext/zip/config.m4
+    docker-php-ext-configure zip --with-libzip; \
+    docker-php-ext-install zip; \
     pecl install \
         apcu-${PECL_APCU_VER} \
         libsodium-${PECL_LIBSODIUM_VER} \
@@ -72,8 +83,6 @@ RUN set -ex; \
         mongodb-${PECL_MONGODB_VER} \
         redis-${PECL_REDIS_VER} \
     ; \
-    docker-php-ext-configure zip --with-libzip; \
-    docker-php-ext-install zip; \
     docker-php-ext-enable \
         apcu \
         memcached \

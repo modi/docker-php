@@ -1,5 +1,4 @@
-# docker build . -t modicn/php:7.4-fpm-alpine3.14 && docker push modicn/php:7.4-fpm-alpine3.14
-# docker tag modicn/php:7.4-fpm-alpine3.14 modicn/php:7.4-fpm-alpine && docker push modicn/php:7.4-fpm-alpine
+# docker build . -t modicn/php:7.4 && docker push modicn/php:7.4
 
 FROM php:7.4-fpm-alpine3.14
 
@@ -40,7 +39,7 @@ RUN set -ex; \
         libmemcached \
         # ext-zip
         libzip \
-        # BusyBox 提供的 unzip，解压输出的文件，权限是 777
+        # BusyBox 的 unzip 输出文件权限是 777 太宽
         unzip \
         # ext-mongodb
         icu-libs \
@@ -49,6 +48,7 @@ RUN set -ex; \
     ; \
     docker-php-ext-install \
         bcmath \
+        exif \
         gmp \
         opcache \
         pcntl \
@@ -56,6 +56,7 @@ RUN set -ex; \
         pdo_pgsql \
         zip \
     ; \
+    # https://github.com/php/php-src/blob/PHP-7.4/ext/gd/config.m4
     docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
