@@ -23,6 +23,8 @@ RUN set -ex; \
         libmcrypt-dev \
         # ext-memcached
         libmemcached-dev \
+        # pdo_pgsql
+        postgresql-dev \
         # ext-zip
         libzip-dev \
     ; \
@@ -39,37 +41,42 @@ RUN set -ex; \
         libmemcached \
         # ext-zip
         libzip \
-        # tools
+        # BusyBox 的 unzip 输出文件权限是 777 太宽
         unzip \
+        # pdo_pgsql
+        libpq \
     ; \
     docker-php-ext-install \
         bcmath \
+        exif \
         gmp \
         mcrypt \
         opcache \
         pcntl \
         pdo_mysql \
+        pdo_pgsql \
     ; \
+    # https://github.com/php/php-src/blob/PHP-5.6/ext/gd/config.m4
     docker-php-ext-configure gd \
         --with-freetype-dir \
         --with-jpeg-dir \
         --with-png-dir \
     ; \
     docker-php-ext-install gd; \
+    # https://github.com/php/php-src/blob/PHP-5.6/ext/zip/config.m4
+    docker-php-ext-configure zip --with-libzip; \
+    docker-php-ext-install zip; \
     pecl install \
         apcu-${PECL_APCU_VER} \
         memcached-${PECL_MEMCACHED_VER} \
         redis-${PECL_REDIS_VER} \
     ; \
-    docker-php-ext-configure zip --with-libzip; \
-    docker-php-ext-install zip; \
     docker-php-ext-enable \
         apcu \
         memcached \
         redis \
     ; \
     rm -rf /tmp/pear; \
-    apk del --no-network .build-deps; \
-    rm -rf /var/cache/apk/*
+    apk del --no-network .build-deps
 
 ENV LANG C.UTF-8

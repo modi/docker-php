@@ -1,3 +1,5 @@
+# docker build . -t modicn/php:7.0-dev && docker push modicn/php:7.0-dev
+
 FROM modicn/php:7.0
 
 # https://github.com/composer/composer/releases
@@ -5,7 +7,7 @@ ARG COMPOSER_VER=2.2.12
 # https://pecl.php.net/package/xdebug
 ARG PHPEXT_XDEBUG_VER=2.8.1
 # https://cs.symfony.com/
-ARG PHP_CS_FIXER_VER=v3
+ARG PHP_CS_FIXER_VER=2.19.3
 # https://github.com/bobthecow/psysh
 ARG PSYSH_VER=v0.11.4
 
@@ -34,9 +36,9 @@ RUN set -ex; \
     wget https://github.com/composer/composer/releases/download/${COMPOSER_VER}/composer.phar -q -O /usr/local/bin/composer; \
     chmod +x /usr/local/bin/composer
 
-#RUN set -ex; \
-#    wget https://cs.symfony.com/download/php-cs-fixer-${PHP_CS_FIXER_VER}.phar -q -O /usr/local/bin/php-cs-fixer; \
-#    chmod +x /usr/local/bin/php-cs-fixer
+RUN set -ex; \
+    wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v${PHP_CS_FIXER_VER}/php-cs-fixer.phar -q -O /usr/local/bin/php-cs-fixer; \
+    chmod +x /usr/local/bin/php-cs-fixer
 
 RUN set -ex; \
     wget https://github.com/bobthecow/psysh/releases/download/${PSYSH_VER}/psysh-${PSYSH_VER}.tar.gz -q -O /tmp/psysh.tar.gz; \

@@ -1,5 +1,4 @@
-# docker build . -t modicn/php:7.4-fpm-alpine3.14-dev && docker push modicn/php:7.4-fpm-alpine3.14-dev
-# docker tag modicn/php:7.4-fpm-alpine3.14-dev modicn/php:7.4-fpm-alpine-dev && docker push modicn/php:7.4-fpm-alpine-dev
+# docker build . -t modicn/php:7.4-dev && docker push modicn/php:7.4-dev
 
 FROM modicn/php:7.4-fpm-alpine3.14
 

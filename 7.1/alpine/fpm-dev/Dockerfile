@@ -1,3 +1,5 @@
+# docker build . -t modicn/php:7.1-dev && docker push modicn/php:7.1-dev
+
 FROM modicn/php:7.1
 
 # https://github.com/composer/composer/releases

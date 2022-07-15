@@ -28,8 +28,7 @@ RUN set -ex; \
         xdebug \
     ; \
     rm -rf /tmp/pear; \
-    apk del --no-network .build-deps; \
-    rm -rf /var/cache/apk/*
+    apk del --no-network .build-deps
 
 RUN set -ex; \
     wget https://github.com/composer/composer/releases/download/${COMPOSER_VER}/composer.phar -q -O /usr/local/bin/composer; \
