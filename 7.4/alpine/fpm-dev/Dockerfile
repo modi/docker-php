@@ -1,6 +1,6 @@
 # docker build . -t modicn/php:7.4-dev && docker push modicn/php:7.4-dev
 
-FROM modicn/php:7.4-fpm-alpine3.14
+FROM modicn/php:7.4
 
 # https://github.com/composer/composer/releases
 ARG COMPOSER_VER=2.1.6
