@@ -43,6 +43,8 @@ RUN set -ex; \
         libzip \
         # BusyBox 的 unzip 输出文件权限是 777 太宽
         unzip \
+        # pdo_pgsql
+        libpq \
     ; \
     docker-php-ext-install \
         bcmath \

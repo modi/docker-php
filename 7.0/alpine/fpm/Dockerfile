@@ -9,7 +9,7 @@ ARG PECL_LIBSODIUM_VER=2.0.23
 # https://pecl.php.net/package/memcached
 ARG PECL_MEMCACHED_VER=3.2.0
 # https://pecl.php.net/package/mongodb
-ARG PECL_MONGODB_VER=1.11.1
+ARG PECL_MONGODB_VER=1.9.2
 # https://pecl.php.net/redis
 ARG PECL_REDIS_VER=5.3.7
 
