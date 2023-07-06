@@ -3,7 +3,7 @@
 基于 [Docker 官方 PHP 镜像](https://hub.docker.com/_/php)构建：
 
 - PHP版本：7.4
-- OS：Alpine Linux 3.16
+- OS：Alpine Linux 3.16 / Debian 11 (Bullseye)
 - 中文字体：[Noto CJK](https://github.com/googlefonts/noto-cjk)
 
 ## 生产环境版
