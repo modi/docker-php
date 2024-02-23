@@ -2,9 +2,9 @@
 
 基于 [Docker 官方 PHP 镜像](https://hub.docker.com/_/php)构建：
 
-- PHP版本：7.4
+- PHP版本：5.6 / 7.0 / 7.1 / 7.3 / 7.4 / 8.3
 - OS：Alpine Linux 3.16 / Debian 11 (Bullseye)
-- 中文字体：[Noto CJK](https://github.com/googlefonts/noto-cjk)
+- 添加了中文字体：[Noto CJK](https://github.com/googlefonts/noto-cjk)
 
 ## 生产环境版
 
@@ -18,6 +18,7 @@
 - imagick
 - memcached
 - mongodb
+- mysqli
 - opcache
 - pcntl
 - pdo_mysql
@@ -27,18 +28,9 @@
 
 ## 开发环境版
 
-在生产环境版基础上，增加的扩展：
+在生产环境版基础上，增加开发工具：
 
 - xdebug
-
-开发工具：
-
 - Composer
 - PHP-CS-Fixer
 - Psysh
-
-## 使用
-
-在开发环境版容器里运行 shell：
-
-    docker run --rm -it modicn/php:7.4-dev ash
