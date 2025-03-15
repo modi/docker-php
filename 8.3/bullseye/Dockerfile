@@ -12,13 +12,12 @@ ARG PECL_IMAGICK_VER=3.7.0
 # https://pecl.php.net/package/memcached
 ARG PECL_MEMCACHED_VER=3.2.0
 # https://pecl.php.net/package/mongodb
-ARG PECL_MONGODB_VER=1.17.2
+ARG PECL_MONGODB_VER=1.19.3
 # https://pecl.php.net/redis
 ARG PECL_REDIS_VER=6.0.2
 
-ENV all_proxy=socks5h://10.10.0.1:1949
-
 RUN set -eux; \
+    sed -i 's@deb\.debian\.org@mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         wget \
@@ -65,6 +64,7 @@ FROM php:8.3-fpm-bullseye
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 
 RUN set -eux; \
+    sed -i 's@deb\.debian\.org@mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         # ext-gd
